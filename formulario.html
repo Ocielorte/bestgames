@@ -1,0 +1,37 @@
+<?php
+  //conexion con el server
+$conectar=mysqli_connect('localhost','root','','datos_registro');
+
+//verificar la conexion
+
+if (!$conectar) {
+    echo "No se pudo conectar con el server";
+    }
+    else {
+      $base=mysqli_select_db($conectar,'datos_registro');
+      if (!$base) {
+            echo "No se encontro la base de datos";
+      }
+    }
+
+    //recuperar las variables
+    $nombre= $_POST ['nombre'];
+    $apellido=$_POST['apellido'];
+    $edad=$_POST ['edad'];
+    $mail=$_POST['mail'];
+    $telefono=$_POST['telefono'];
+
+    //entencia SQL
+    $SQL = "INSERT INTO datos (nombre,apellido,edad,mail,telefono) VALUES ('$nombre','$apellido','$edad','$mail','$telefono')";
+
+    //ejecutar
+     $ejecutar=mysqli_query($conectar,$SQL);
+
+   //verificar la ejecucion
+    if (!$ejecutar) {
+          echo "Hubo algun error";
+    }
+    else {
+      echo "datos guardados correctamente";
+    }
+  ?>
